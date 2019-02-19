@@ -1,0 +1,19 @@
+server:
+  port: 8090
+spring:
+  resources:
+    static-locations: classpath:/static/,classpath:/web/,classpath:/music/
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 1234
+    url: jdbc:mysql://localhost:3306/music_db
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+mybatis:
+  type-aliases-package: com.bittech.musicmanager.entity
+  mapper-locations: classpath:mybatis/*.mapper.xml
+pagehelper:
+  reasonable: true

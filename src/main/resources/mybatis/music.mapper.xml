@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bittech.musicmanager.mapper.MusicMapper">
+    <resultMap id="MusicMap" type="Music">
+        <id property="id" column="music_id"/>
+        <result property="name" column="music_name"/>
+        <result property="singer" column="music_singer"/>
+        <result property="time" column="music_time"/>
+        <result property="path" column="music_path"/>
+    </resultMap>
+
+    <insert id="addMusic">
+        insert into music_table(music_name, music_singer, music_time, music_path)
+        values(#{name},#{singer},#{time},#{path})
+    </insert>
+
+
+    <select id="findAllMusic" resultMap="MusicMap">
+        select * from music_table
+    </select>
+    <select id="findMusicByName" resultMap="MusicMap">
+        select * from music_table
+        where music_name = #{name}
+    </select>
+
+</mapper>

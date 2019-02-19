@@ -1,6 +1,10 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
+/src/main/resources/music
+/src/main/resources/static/assets
+/src/main/resources/static/bootstrap
+
 ### STS ###
 .apt_generated
 .classpath
