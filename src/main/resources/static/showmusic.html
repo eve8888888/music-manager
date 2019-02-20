@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap/common/css/bootstrap.css">
+    <link rel="stylesheet" href="bootstrap/plugin/table/css/bootstrap-table.css">
+    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bootstrap/plugin/sweetalert/css/sweetalert2.css">
+    <link rel="stylesheet" href="bootstrap/plugin/validator/css/bootstrapValidator.css">
+    <script src="assets/vendor/js/jquery-2.1.1.min.js"></script>
+    <script src="assets/vendor/skycons/js/skycons.js"></script>
+    <script src="assets/plugins/jquery-ui/js/jquery-ui-1.10.4.min.js"></script>
+    <script src="assets/js/core.min.js"></script>
+    <script src="assets/js/pages/index.js"></script>
+    <script src="bootstrap/common/js/jquery-3.2.1.js"></script>
+    <script src="bootstrap/common/js/bootstrap.js"></script>
+    <script src="bootstrap/plugin/table/js/bootstrap-table.js"></script>
+    <script src="bootstrap/plugin/table/js/bootstrap-table-zh-CN.js"></script>
+    <script src="bootstrap/plugin/sweetalert/js/sweetalert2.js"></script>
+    <script src="bootstrap/plugin/validator/js/bootstrapValidator.js"></script>
+    <script src="bootstrap/plugin/validator/js/language/zh_CN.js"></script>
+</head>
+<body>
+<style>
+    .a{
+        width: 1500px;
+        margin: auto;
+    }
+</style>
+<div class="a">
+    <!--<div class="btn-group" role="group">-->
+        <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus"></span>增加</button>-->
+        <!--<button type="button" class="btn btn-warning" id="updateId"><span class="glyphicon glyphicon-pencil"></span>修改</button>-->
+        <!--<button type="button" class="btn btn-danger" id="deleteId"><span class="glyphicon glyphicon-remove"></span>删除</button>-->
+    <!--</div>-->
+
+    <div >
+        <table id="tableId">
+        </table>
+    </div>
+    <!--模态框区域-->
+    <!-- 添加模态框 -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addModalLabel">添加电影</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="addFormId">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">电影名</label>
+                            <div class="col-md-9">
+                                <input type="text" name="name" placeholder="请输入电影名" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">导演</label>
+                            <div class="col-md-9">
+                                <input type="text" name="director" placeholder="请输入导演名" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">电影简介</label>
+                            <div class="col-md-9">
+                                <textarea  name="desc" rows="6" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">电影路径</label>
+                            <div class="col-md-9">
+                                <input type="file" name="path"  id="picId">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"></label>
+                            <div class="col-md-9">
+                                <input type="button"  value="添加电影" class="form-control btn btn-success" id="addConfirmId">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div><!-- 添加模态框end -->
+
+    <!----修改模态框  --->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >修改电影信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="updateFormId">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">编号:</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control"  name="id"  readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">电影名:</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" placeholder="请输入电影名" name="name" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">导演:</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" placeholder="请输入导演" name="director" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">简介:</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" name="desc" rows="6"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">路径:</label>
+                            <div class="col-md-9">
+                                <input type="file" name="path" id="updatePicId">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"></label>
+                            <div class="col-md-4">
+                                <input type="button" class="form-control btn btn-primary" value="确定" id="updateConfirmId">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div><!----修改模态框end  --->
+</div>
+    <script>
+        $(function () {
+            $("#tableId").bootstrapTable({
+                url:'findAllMusic.action',
+                pagination:true,
+                pageSize:15,
+                pageList:[1,4,5,18],
+                search:true,
+                columns:[
+                    {
+                        checkbox:true
+                    },
+                    {
+                        field:'id',
+                        title:'编号'
+                    },
+                    {
+                        field:'name',
+                        title:'音乐名'
+                    },
+                    {
+                        field:'singer',
+                        title:'歌手'
+                    },
+                    {
+                        field:'time',
+                        title:'时长'
+                    },
+                    {
+                        field:'path',
+                        title:'下载'
+                    }]
+            });
+            //添加
+            $("#addConfirmId").click(function () {
+                var _data = $("#addFormId").serialize();
+                $.ajax({
+                    url:'addMovie.action',
+                    type:'post',
+                    data:_data,
+                    dataType:'text',
+                    success:function (msg) {
+                        $("#addModal").modal('hide');
+                        $("#tableId").bootstrapTable('refresh');
+                        swal({
+                            title:'添加提示',
+                            text:msg,
+                            type:'success'
+                        })
+                    }
+                })
+            });
+            //修改
+            $("#updateConfirmId").click(function () {
+                var _data = $("#updateFormId").serialize();
+                $.ajax({
+                    url:'updateMovie.action',
+                    type:'post',
+                    data:_data,
+                    dataType:'text',
+                    success:function (msg) {
+                        $("#updateModal").modal('hide');
+                        $("#tableId").bootstrapTable('refresh');
+                        swal({
+                            title:'添加提示',
+                            text:msg,
+                            type:'success'
+                        })
+                    }
+                })
+            })
+            //修改放值的部分
+            $("#updateId").click(function () {
+                var rows = $("#tableId").bootstrapTable('getSelections');
+                if(rows.length < 1){
+                    swal({
+                        title:'修改提示',
+                        text:'您还未选中修改的项',
+                        type:'warning'
+                    })
+                }else if(rows.length >1){
+                    swal({
+                        title:'修改提示',
+                        text:'每次只能修改一项',
+                        type:'warning'
+                    })
+                }else {
+                    var movie = $("#tableId").bootstrapTable('getSelections')[0];
+                    $("#updateFormId input[name = id]").val(movie.id);
+                    $("#updateFormId input[name = name]").val(movie.name);
+                    $("#updateFormId textarea").val(movie.desc);
+                    $("#updateFormId input[name = path]").val(movie.pic);
+                    $("#updateModal").modal('show')
+                }
+            })
+
+            $("#deleteId").click(function () {
+                var rows =$("#tableId").bootstrapTable('getSelections');
+                var _ids = $.map(rows,function (row) {
+                    return row.id;
+                });
+                if(rows<1){
+                    swal({
+                        title:'修改提示',
+                        text:'您还未选中删除的项',
+                        type:'error'
+                    })
+                }else {
+                    $.post('deleteMovie.action',{ids:_ids.join()},function (msg) {
+                        $("#tableId").bootstrapTable('refresh');
+                        swal({
+                            title:'删除提示',
+                            text:msg,
+                            type:'success'
+                        })
+                    })
+                }
+            })
+        })
+    </script>
+</body>
+</html>
