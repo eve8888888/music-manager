@@ -2,7 +2,7 @@ server:
   port: 8090
 spring:
   resources:
-    static-locations: classpath:/static/,classpath:/web/,classpath:/music/
+    static-locations: classpath:/static/
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: root

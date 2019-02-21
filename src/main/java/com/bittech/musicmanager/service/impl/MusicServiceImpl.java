@@ -135,4 +135,16 @@ public class MusicServiceImpl implements IMusicService {
             }
         }
     }
+
+    /**
+     * 清理失效文件
+     */
+    private void clearMusic(){
+        File[] files =
+                new File(System.getProperty("user.dir")
+                        + "\\src\\main\\resources\\music").listFiles();
+        List<Music> musicList = findAllMusic();
+        for(Music m : musicList){
+        }
+    }
 }

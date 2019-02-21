@@ -35,9 +35,9 @@
         <li class="resp-tab-item" onclick="display('lb','lb2')"><a href="#"><span style="color: white">登录</span></a></li>
         <li  class="resp-tab-item" onclick="display2('lb','lb2')"><a href="#" aria-controls=""><span style="color: white">注册</span></a></li>
     </ul>
-
+    <!--登录部分-->
     <div class="register" id="lb" align="center" >
-        <form action="login.action" method="post" onload="checkForm()" name="Form1">
+        <form action="/login.action" method="post" onload="checkForm()" name="Form1">
             <input name="user_email" placeholder="Email" type="text" required="required"><br>
             <input name="user_pwd" placeholder="Password" type="password" required="">
             <div class="sign-up">
@@ -46,6 +46,7 @@
             <input type="hidden" name="message" value='<%=request.getAttribute("message")%>'>
         </form>
     </div>
+    <!--注册部分-->
     <div >
         <div class="register" style="display: none" id="lb2" align="center" >
             <form action="register.action" method="post">

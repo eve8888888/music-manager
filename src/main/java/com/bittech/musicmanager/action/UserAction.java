@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -29,10 +30,16 @@ public class UserAction {
      */
     @RequestMapping("/login.action")
     public void  userLogin(HttpServletRequest request, HttpServletResponse response){
+
+        HttpSession session = request.getSession();
         String userEmail = request.getParameter("user_email");
         String userPassword = request.getParameter("user_pwd");
-        if(ius.userLogin(userEmail,userPassword)){
+        System.out.println(userEmail);
+        System.out.println(userPassword);
+        if (ius.userLogin(userEmail, userPassword)) {
             try {
+                session.setAttribute("user",userEmail);
+                System.out.println("这是Session==========="+session);
                 response.sendRedirect("showmusic.html");
             } catch (IOException e) {
                 e.printStackTrace();
@@ -50,8 +57,7 @@ public class UserAction {
             e.printStackTrace();
         }
     }
-
-    @RequestMapping("/register.action")
+    @RequestMapping("register.action")
     public void userRegister(HttpServletRequest request, HttpServletResponse response){
         String name = request.getParameter("Name");
         String email = request.getParameter("Email");
