@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:E="http://java.sun.com/JSP/Page">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>音乐列表</title>
     <link rel="stylesheet" href="bootstrap/common/css/bootstrap.css">
     <link rel="stylesheet" href="bootstrap/plugin/table/css/bootstrap-table.css">
-    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="assets/css/style.css" rel="stylesheet"/>
     <link rel="stylesheet" href="bootstrap/plugin/sweetalert/css/sweetalert2.css">
     <link rel="stylesheet" href="bootstrap/plugin/validator/css/bootstrapValidator.css">
     <script src="assets/vendor/js/jquery-2.1.1.min.js"></script>
@@ -21,139 +21,63 @@
     <script src="bootstrap/plugin/sweetalert/js/sweetalert2.js"></script>
     <script src="bootstrap/plugin/validator/js/bootstrapValidator.js"></script>
     <script src="bootstrap/plugin/validator/js/language/zh_CN.js"></script>
+
 </head>
 <body>
-<style>
-    .a{
+<style type="text/css">
+    .a {
         width: 1500px;
         margin: auto;
     }
 </style>
-<div class="a">
-    <div >
-        <table id="tableId">
-        </table>
+<div id="showmusic">
+    <div>
+        <a href="quit.action">退出登录</a>
     </div>
+    <div class="a">
+        <div>
+            <table id="tableId">
+            </table>
+        </div>
+    </div>
+    <!--<audio controls="controls">-->
+        <!--<source src="../music/HITA-昔颜念.mp3" type="audio/mp3" />-->
+    <!--</audio>-->
 </div>
-    <script>
-        $(function () {
-            $("#tableId").bootstrapTable({
-                url:'findAllMusic.action',
-                pagination:true,
-                pageSize:15,
-                pageList:[1,4,5,18],
-                search:true,
-                columns:[
-                    {
-                        checkbox:true
-                    },
-                    {
-                        field:'id',
-                        title:'编号'
-                    },
-                    {
-                        field:'name',
-                        title:'音乐名'
-                    },
-                    {
-                        field:'singer',
-                        title:'歌手'
-                    },
-                    {
-                        field:'time',
-                        title:'时长'
-                    },
-                    {
-                        field:'path',
-                        title:'下载'
-                    }]
-            });
-            //添加
-            $("#addConfirmId").click(function () {
-                var _data = $("#addFormId").serialize();
-                $.ajax({
-                    url:'addMovie.action',
-                    type:'post',
-                    data:_data,
-                    dataType:'text',
-                    success:function (msg) {
-                        $("#addModal").modal('hide');
-                        $("#tableId").bootstrapTable('refresh');
-                        swal({
-                            title:'添加提示',
-                            text:msg,
-                            type:'success'
-                        })
-                    }
-                })
-            });
-            //修改
-            $("#updateConfirmId").click(function () {
-                var _data = $("#updateFormId").serialize();
-                $.ajax({
-                    url:'updateMovie.action',
-                    type:'post',
-                    data:_data,
-                    dataType:'text',
-                    success:function (msg) {
-                        $("#updateModal").modal('hide');
-                        $("#tableId").bootstrapTable('refresh');
-                        swal({
-                            title:'添加提示',
-                            text:msg,
-                            type:'success'
-                        })
-                    }
-                })
-            })
-            //修改放值的部分
-            $("#updateId").click(function () {
-                var rows = $("#tableId").bootstrapTable('getSelections');
-                if(rows.length < 1){
-                    swal({
-                        title:'修改提示',
-                        text:'您还未选中修改的项',
-                        type:'warning'
-                    })
-                }else if(rows.length >1){
-                    swal({
-                        title:'修改提示',
-                        text:'每次只能修改一项',
-                        type:'warning'
-                    })
-                }else {
-                    var movie = $("#tableId").bootstrapTable('getSelections')[0];
-                    $("#updateFormId input[name = id]").val(movie.id);
-                    $("#updateFormId input[name = name]").val(movie.name);
-                    $("#updateFormId textarea").val(movie.desc);
-                    $("#updateFormId input[name = path]").val(movie.pic);
-                    $("#updateModal").modal('show')
-                }
-            })
-
-            $("#deleteId").click(function () {
-                var rows =$("#tableId").bootstrapTable('getSelections');
-                var _ids = $.map(rows,function (row) {
-                    return row.id;
-                });
-                if(rows<1){
-                    swal({
-                        title:'修改提示',
-                        text:'您还未选中删除的项',
-                        type:'error'
-                    })
-                }else {
-                    $.post('deleteMovie.action',{ids:_ids.join()},function (msg) {
-                        $("#tableId").bootstrapTable('refresh');
-                        swal({
-                            title:'删除提示',
-                            text:msg,
-                            type:'success'
-                        })
-                    })
-                }
-            })
-        })
-    </script>
+<script>
+    $(function () {
+        $("#tableId").bootstrapTable({
+            url: 'findAllMusic.action',
+            pagination: true,
+            pageSize: 15,
+            pageList: [1, 4, 5, 18],
+            search: true,
+            columns: [
+                {
+                    checkbox: true
+                },
+                {
+                    field: 'id',
+                    title: '编号'
+                },
+                {
+                    field: 'name',
+                    title: '音乐名'
+                },
+                {
+                    field: 'singer',
+                    title: '歌手'
+                },
+                {
+                    field: 'time',
+                    title: '时长'
+                },
+                {
+                    field: 'path',
+                    title: '下载'
+                }]
+        });
+    })
+</script>
 </body>
 </html>

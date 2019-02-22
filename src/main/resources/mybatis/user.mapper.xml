@@ -16,7 +16,7 @@
     </insert>
 
 
-    <select id="findAllUsers" resultMap="UserMap">
+    <select id="findAllUser" resultMap="UserMap">
         select * from user_table
     </select>
     <select id="findUserByEmail" resultMap="UserMap">
@@ -33,5 +33,6 @@
         set user_name=#{name},
             user_email = #{email},
             user_password=#{password}
+        where user_id=#{id}
     </update>
 </mapper>

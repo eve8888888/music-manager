@@ -28,6 +28,9 @@ public class MusicAction {
     @RequestMapping("/findAllMusic.action")
     public @ResponseBody
     List<Music> findAllMusic() {
+
+        //清理失效音乐文件
+        ims.clearMusic();
         return ims.findAllMusic();
     }
 

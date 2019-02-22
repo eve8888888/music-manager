@@ -9,6 +9,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @SpringBootTest
@@ -31,5 +33,14 @@ public class UserServiceImplTest {
         System.out.println("**************************");
         System.out.println(ius.userLogin("123456789","qweasdzxc"));
         System.out.println("**************************");
+    }
+
+    @Test
+    public void findAllUser(){
+        List<User> list = ius.findAllUser();
+        for (User u :
+                list) {
+            System.out.println(u.getName());
+        }
     }
 }

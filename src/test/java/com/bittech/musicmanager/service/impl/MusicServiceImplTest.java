@@ -26,4 +26,9 @@ public class MusicServiceImplTest {
     public void addMusic(){
         ims.addMusic();
     }
+
+    @Test
+    public void clearFile(){
+        ims.clearMusic();
+    }
 }

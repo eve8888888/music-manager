@@ -26,4 +26,10 @@ public interface MusicMapper {
      * @return music
      */
     Music findMusicByName(String name);
+
+    /**
+     * 根据歌曲名删除歌曲
+     * @param name 歌曲名
+     */
+    void deleteMusic(String name);
 }

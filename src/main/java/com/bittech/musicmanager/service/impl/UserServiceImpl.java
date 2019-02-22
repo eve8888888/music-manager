@@ -6,6 +6,7 @@ import com.bittech.musicmanager.service.IUserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author: Eve
@@ -24,12 +25,11 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public boolean userRegister(User user) {
-        String email = user.getEmail();
-        if(userMapper.findUserByEmail(email) != null){
-            return false;
+        if(checkUser(user)){
+            userMapper.addUser(user);
+            return true;
         }
-        userMapper.addUser(user);
-        return true;
+        return false;
     }
 
     /**
@@ -41,6 +41,7 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public boolean userLogin(String email,String password) {
+
         User user = userMapper.findUserByEmail(email);
         if(user == null){
             return false;
@@ -49,5 +50,37 @@ public class UserServiceImpl implements IUserService {
         }
     }
 
+    @Override
+    public List<User> findAllUser() {
+        return userMapper.findAllUser();
+    }
 
+    @Override
+    public void updateUser(User user) {
+        userMapper.updateUser(user);
+    }
+
+    @Override
+    public void deleteUser(String ids) {
+        String[] str = ids.split(",");
+        for (String s:
+                str) {
+            Integer is = Integer.parseInt(s);
+            userMapper.deleteUser(is);
+        }
+    }
+
+    public void addUser(User user){
+        userMapper.addUser(user);
+    }
+
+    public User findUserByEmail(String email){
+        return userMapper.findUserByEmail(email);
+    }
+
+
+    public boolean checkUser(User user){
+        String email = user.getEmail();
+        return userMapper.findUserByEmail(email) == null;
+    }
 }

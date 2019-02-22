@@ -19,7 +19,6 @@ public class SessionFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {
-
     }
 
     @Override
@@ -28,12 +27,8 @@ public class SessionFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession(false);
         String uri = request.getRequestURI();
-
         System.out.println("filter url:" + uri);
-        //是否需要过滤
-        //boolean needFilter = isNeedFilter(uri);
-
-        if (uri.equals("/index.html") || uri.equals("/login.action")
+        if (uri.equals("/index.html") || uri.equals("/login.action") || uri.equals("/register.action")
                 || uri.startsWith("/bootstrap") || uri.startsWith("/css") || uri.startsWith("/assets")) { //不需要过滤直接传给下一个过滤器
             filterChain.doFilter(servletRequest, servletResponse);
         } else { //需要过滤器

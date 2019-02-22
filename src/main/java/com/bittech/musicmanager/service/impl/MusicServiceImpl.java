@@ -30,6 +30,7 @@ public class MusicServiceImpl implements IMusicService {
 
     /**
      * 查找所有音乐
+     *
      * @return list
      */
     @Override
@@ -47,7 +48,7 @@ public class MusicServiceImpl implements IMusicService {
         File[] files =
                 new File(System.getProperty("user.dir")
                         + "\\src\\main\\resources\\music").listFiles();
-        if (files!=null) {
+        if (files != null) {
             for (File f :
                     files) {
                 try {
@@ -69,9 +70,9 @@ public class MusicServiceImpl implements IMusicService {
                 music.setName(name);
                 music.setSinger(singer);
                 music.setTime(time);
-                String path = "<a href=\"download.action?name="+f.getName()+"\" download=\""+name+"\">点击下载</a>";
+                String path = "<a href=\"download.action?name=" + f.getName() + "\" download=\"" + name + "\">点击下载</a>";
                 music.setPath(path);
-                if(findMusicByName(name)==null){
+                if (findMusicByName(name) == null) {
                     musicMapper.addMusic(music);
                 }
             }
@@ -80,6 +81,7 @@ public class MusicServiceImpl implements IMusicService {
 
     /**
      * 通过名称进行查找
+     *
      * @param name 音乐名称
      * @return music
      */
@@ -90,7 +92,8 @@ public class MusicServiceImpl implements IMusicService {
 
     /**
      * 实现音乐下载
-     * @param request request
+     *
+     * @param request  request
      * @param response response
      */
     @Override
@@ -139,12 +142,18 @@ public class MusicServiceImpl implements IMusicService {
     /**
      * 清理失效文件
      */
-    private void clearMusic(){
-        File[] files =
-                new File(System.getProperty("user.dir")
-                        + "\\src\\main\\resources\\music").listFiles();
+    public void clearMusic() {
+
         List<Music> musicList = findAllMusic();
-        for(Music m : musicList){
+        for (Music m : musicList) {
+            String temp = m.getSinger() + "-" + m.getName();
+            File file =
+                    new File(System.getProperty("user.dir")
+                            + "\\src\\main\\resources\\music\\" + temp);
+            if (!file.exists()) {
+                musicMapper.deleteMusic(m.getName());
+            }
         }
     }
+
 }

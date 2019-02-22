@@ -32,4 +32,11 @@ public interface IMusicService {
      * @param response response
      */
     void downloadMusic(HttpServletRequest request, HttpServletResponse response);
+
+    /**
+     * 清除失效的歌曲文件
+     */
+    void clearMusic();
+
+
 }

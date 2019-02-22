@@ -3,6 +3,8 @@ package com.bittech.musicmanager.mapper;
 import com.bittech.musicmanager.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
     /**
@@ -14,7 +16,7 @@ public interface UserMapper {
     /**
      * 查找用户
      */
-    void findAllUsers();
+    List<User> findAllUser();
 
     /**
      * 通过邮箱进行查找对象
@@ -34,4 +36,5 @@ public interface UserMapper {
      * @param user 用户对象
      */
     void updateUser(User user);
+    
 }
